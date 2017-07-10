@@ -8,8 +8,10 @@
 namespace DataFormats_CPPFDigi {
   struct dictionary {
 
-    typedef edm::RangeMap <RPCDetId, edm::OwnVector<CPPFDigi>> CPPFDigiCollection;
-
+  
+   
+    typedef edm::RangeMap <RPCDetId, edm::OwnVector<CPPFDigi>> CPPFDigiCollection;   
+ 
     CPPFDigi rrh;
     std::vector<CPPFDigi> vrh;
     CPPFDigiCollection cc;

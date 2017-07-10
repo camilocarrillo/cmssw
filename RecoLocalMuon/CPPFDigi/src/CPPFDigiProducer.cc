@@ -51,7 +51,8 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
   for ( auto rechit_it  = rechits->begin(); rechit_it  != rechits->end(); ++rechit_it  ) {
 
   
-  RPCDetId idRoll(rechit_it->rpcId());
+  RPCDetId idRoll(rechit_it->rpcId()); 
+  int idsector  = idRoll.sector();
   int bx = rechit_it->BunchX(); 
   int isValid = rechit_it->isValid();
   int firststrip = rechit_it->firstClusterStrip();
@@ -61,6 +62,7 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
   const RPCRoll* roll = rpcGeo->roll(idRoll);
   const BoundPlane& rollSurface = roll->surface();
   GlobalPoint gPos = rollSurface.toGlobal(lPos);
+ 
   //theta calculation
   double glob_theta = emtf::rad_to_deg(gPos.theta());
   double int_theta=0.; 
@@ -68,12 +70,15 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
   if(glob_theta < 8.5) int_theta=0.;
   if(glob_theta > 45.) int_theta=31.;
 
-  double local_phi = emtf::rad_to_deg(lPos.phi());   
-  //double glob_phi   = emtf::rad_to_deg(gPos.phi());
-  double int_phi=0.;
-  int_phi = (local_phi+22.)*15.;
+  //Phi calculation
+  double glob_phi   = emtf::rad_to_deg(gPos.phi().value());
+//  double int_phi = 0.;
+  int fph = emtf::calc_phi_loc_int(glob_phi, idsector, 11);
+//  assert(0 <= fph && fph < 1250);
+//  int_phi = (lPos.phi().value() + 22.0)*15.0; 
+
  
-  CPPFDigi* MainVariables = new CPPFDigi(idRoll, bx, int_phi, int_theta, isValid, firststrip, clustersize);
+  CPPFDigi* MainVariables = new CPPFDigi(idRoll, bx, fph, int_theta, isValid, firststrip, clustersize);
 
   OwnVector<CPPFDigi> Angular;
   Angular.push_back(MainVariables);

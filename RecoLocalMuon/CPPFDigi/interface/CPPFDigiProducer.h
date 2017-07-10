@@ -16,6 +16,7 @@
 #include "DataFormats/RPCRecHit/interface/RPCRecHitCollection.h"
 
 #include "CondFormats/RPCObjects/interface/RPCDeadStrips.h"
+#include <assert.h>
 
 class CPPFDigiProducer : public edm::stream::EDProducer<> {
 
