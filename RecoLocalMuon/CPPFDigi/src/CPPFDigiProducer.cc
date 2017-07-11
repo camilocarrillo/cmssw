@@ -52,7 +52,7 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
 
   
   RPCDetId idRoll(rechit_it->rpcId()); 
-  int idsector  = idRoll.sector();
+  //int idsector  = idRoll.sector();
   int bx = rechit_it->BunchX(); 
   int isValid = rechit_it->isValid();
   int firststrip = rechit_it->firstClusterStrip();
@@ -70,15 +70,25 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
   if(glob_theta < 8.5) int_theta=0.;
   if(glob_theta > 45.) int_theta=31.;
 
-  //Phi calculation
+  //Global Phi calculation
   double glob_phi   = emtf::rad_to_deg(gPos.phi().value());
-//  double int_phi = 0.;
-  int fph = emtf::calc_phi_loc_int(glob_phi, idsector, 11);
-//  assert(0 <= fph && fph < 1250);
-//  int_phi = (lPos.phi().value() + 22.0)*15.0; 
-
+  double int_phi = 0.;
  
-  CPPFDigi* MainVariables = new CPPFDigi(idRoll, bx, fph, int_theta, isValid, firststrip, clustersize);
+  //Local phi EMTF calculation   
+  double localEMTFPhi = 0.;
+  if((glob_phi > 15.) && (glob_phi <= 75.)) localEMTFPhi = glob_phi-15.; 
+  if((glob_phi > 75.) && (glob_phi <= 135.)) localEMTFPhi = glob_phi-75.; 
+  if((glob_phi > 135.) && (glob_phi <= -165.)) localEMTFPhi = glob_phi-135.; 
+  if((glob_phi > -165.) && (glob_phi <= -105.)) localEMTFPhi = glob_phi+165.; 
+  if((glob_phi > -105.) && (glob_phi <= -45.)) localEMTFPhi = glob_phi+105.; 
+  if((glob_phi > -45.) && (glob_phi <= 15.)) localEMTFPhi = glob_phi+45.;  
+
+  //Invalid hit
+  if(isValid == 0) int_phi = 2047;
+
+  int_phi = (localEMTFPhi + 22.0)*15.0; 
+ 
+  CPPFDigi* MainVariables = new CPPFDigi(idRoll, bx, int_phi, int_theta, glob_phi, glob_theta ,isValid, firststrip, clustersize);
 
   OwnVector<CPPFDigi> Angular;
   Angular.push_back(MainVariables);

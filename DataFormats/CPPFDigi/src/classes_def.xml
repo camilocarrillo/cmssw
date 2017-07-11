@@ -1,7 +1,7 @@
 <lcgdict>
 <selection>
-<class name="CPPFDigi" splitLevel="0" ClassVersion="22">
- <version ClassVersion="22" checksum="155468926"/>
+<class name="CPPFDigi" splitLevel="0" ClassVersion="24">
+ <version ClassVersion="24" checksum="3472076045"/>
 </class>
 <class name="std::vector<CPPFDigi>" splitLevel="0"/>
 <class name="std::vector<CPPFDigi*>" splitLevel="0"/>

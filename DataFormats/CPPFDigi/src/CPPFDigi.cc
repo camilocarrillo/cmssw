@@ -8,24 +8,28 @@
 
 
 CPPFDigi::CPPFDigi(const RPCDetId& rpcId, int bx) : theRPCId(rpcId), theBx(bx),
-						    thePhi_int(0), theTheta_int(0)
+						    thePhi_int(0), theTheta_int(0),
+						    theGPhi(0), theGTheta(0)
 {
 }
 
 
 CPPFDigi::CPPFDigi(): theRPCId(), theBx(99),
-		      thePhi_int(0), theTheta_int(0)
+		      thePhi_int(0), theTheta_int(0),
+		      theGPhi(0), theGTheta(0)
 {
 }
 
 CPPFDigi::CPPFDigi (const RPCDetId& rpcId,
 		    int bx,
-		    double phi,
-		    double theta,		 
+		    int16_t phi,
+		    int8_t theta,
+		    double Gphi,
+		    double Gtheta,		 
 		    int isvalid,
 		    int firstStrip,
 		    int clustSize) : theRPCId(rpcId),
-				     theBx(bx), thePhi_int(phi), theTheta_int(theta), theIsvalid(isvalid), theFirstStrip(firstStrip), theClusterSize(clustSize)
+				     theBx(bx), thePhi_int(phi), theTheta_int(theta), theGPhi(Gphi), theGTheta(Gtheta), theIsvalid(isvalid), theFirstStrip(firstStrip), theClusterSize(clustSize)
 {
 }
 

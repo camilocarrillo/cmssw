@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cstdint>
 #include <iosfwd>
+#include <stdint.h>
 
 class CPPFDigi{
  public:
@@ -20,8 +21,10 @@ class CPPFDigi{
   // Constructor for angular variables
   explicit CPPFDigi (const RPCDetId& rpcId, 
 		     int bx, 
-		     double phi, 
-		     double theta,
+		     int16_t phi, 
+		     int8_t theta,
+		     double Gphi,
+		     double Gtheta,
  		     int isvalid,
 		     int firstStrip,
 		     int clustSize); 
@@ -44,7 +47,16 @@ class CPPFDigi{
   double theta() const { 
     return theTheta_int;
   }
-  
+
+  double Gphi() const {
+    return theGPhi;
+  }
+
+  double Gtheta() const {
+    return theGTheta;
+  }
+ 
+ 
   int IsValid() const{
     return theIsvalid;
   }
@@ -65,8 +77,10 @@ class CPPFDigi{
   
   RPCDetId theRPCId;
   int theBx;
-  double thePhi_int;
-  double theTheta_int;
+  int16_t thePhi_int;
+  int8_t theTheta_int;
+  double theGPhi;
+  double theGTheta;
   int theIsvalid;
   int theFirstStrip;
   int theClusterSize;
