@@ -31,19 +31,22 @@ process.load('RecoLocalMuon.CPPFDigi.cppfDigis_cfi')
 from RecoLocalMuon.CPPFDigi.cppfDigis_cfi import *
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(40)
+    input = cms.untracked.int32(2000)
+)
+
+process.maxLuminosityBlocks = cms.untracked.PSet(
+  input = cms.untracked.int32(20)
 )
 
 # Input source
-process.source = cms.Source("EmptySource")
-
+process.source = cms.Source("EmptySource"
+)
 process.options = cms.untracked.PSet(
-
 )
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('SingleMuPt10_pythia8_cfi.py nevts:30'),
+    annotation = cms.untracked.string('SingleMuPt10_pythia8_cfi.py nevts:100'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -78,7 +81,7 @@ process.generator = cms.EDFilter("Pythia8PtGun",
         AddAntiParticle = cms.bool(True),
         MaxEta = cms.double(5.0),
         MaxPhi = cms.double(3.14159265359),
-        MaxPt = cms.double(60.01),
+        MaxPt = cms.double(100.01),
         MinEta = cms.double(-5.0),
         MinPhi = cms.double(-3.14159265359),
         MinPt = cms.double(9.99),
@@ -116,7 +119,6 @@ for path in process.paths:
 
 
 # Customisation from command line
-
 # Add early deletion of temporary data products to reduce peak memory need
 from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
 process = customiseEarlyDelete(process)

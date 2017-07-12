@@ -44,14 +44,19 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
   setup.get<MuonGeometryRecord>().get(rpcGeo);
 
   // Create the pointer to the collection which will store the cppfdigis 
-  auto cppfdigiCollection = std::make_unique<CPPFDigiCollection>();
-//  std::unique_ptr<CPPFDigiCollection> cppfdigiCollection(new CPPFDigiCollection());
+ //  auto cppfdigiCollection = std::make_unique<CPPFDigiCollection>();
+  std::unique_ptr<CPPFDigiCollection> cppfdigiCollection(new CPPFDigiCollection());
   //Create rechit iterator
 
-  for ( auto rechit_it  = rechits->begin(); rechit_it  != rechits->end(); ++rechit_it  ) {
+  RPCDetId control;
 
+  for ( auto rechit_it  = rechits->begin(); rechit_it  != rechits->end(); ++rechit_it  ) {
+  
   
   RPCDetId idRoll(rechit_it->rpcId()); 
+  
+  if(idRoll==control) continue;
+       
   //int idsector  = idRoll.sector();
   int bx = rechit_it->BunchX(); 
   int isValid = rechit_it->isValid();
@@ -87,7 +92,9 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
   if(isValid == 0) int_phi = 2047;
 
   int_phi = (localEMTFPhi + 22.0)*15.0; 
- 
+
+//  cout << "RPCID" << idRoll << " bx" << bx << " intphi"<< int_phi << "inttheta " << int_theta << " globalphi" << glob_phi << " globalheta" << glob_theta << " " << isValid << " " << firststrip << " " << clustersize << " "<<endl;
+   
   CPPFDigi* MainVariables = new CPPFDigi(idRoll, bx, int_phi, int_theta, glob_phi, glob_theta ,isValid, firststrip, clustersize);
 
   OwnVector<CPPFDigi> Angular;
@@ -95,7 +102,11 @@ void CPPFDigiProducer::produce(Event& event, const EventSetup& setup) {
 
   cppfdigiCollection->put(idRoll,Angular.begin(), Angular.end());
 
+  control = idRoll;
+
   }
   event.put(std::move(cppfdigiCollection));
 
 }
+
+

@@ -6,9 +6,6 @@
 *  \author A. Segura - Universidad de los Andes
 */
 
-
-#include <functional>
-
 #include <DataFormats/MuonDetId/interface/RPCDetId.h>
 #include <DataFormats/CPPFDigi/interface/CPPFDigi.h>
 #include <DataFormats/MuonData/interface/MuonDigiCollection.h>
@@ -17,10 +14,8 @@
 #include "DataFormats/Common/interface/ClonePolicy.h"
 #include "DataFormats/Common/interface/OwnVector.h"
 
-typedef edm::RangeMap <RPCDetId,
-		        edm::OwnVector<CPPFDigi,edm::ClonePolicy<CPPFDigi> >,
-			edm::ClonePolicy<CPPFDigi> > CPPFDigiCollection;
 
+typedef edm::RangeMap <RPCDetId, edm::OwnVector<CPPFDigi>> CPPFDigiCollection;
 
 #endif
 
