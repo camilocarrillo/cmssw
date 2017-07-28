@@ -39,5 +39,9 @@
   <class name="edm::Wrapper<l1t::EMTFTrackCollection>"/>
   <class name="l1t::EMTFPtLUT"/>
 
+  <class name="l1t::CPPFDigi"/>
+  <class name="l1t::CPPFDigiCollection"/>
+  <class name="edm::Wrapper<l1t::CPPFDigiCollection>"/>
+
  </selection>
 </lcgdict>
