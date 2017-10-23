@@ -21,6 +21,7 @@ public:
       // l1t::CPPFDigiCollection& cppf_rpcDigi,
       l1t::CPPFDigiCollection& cppf_recHit
   );
+
   
 private:
   
@@ -31,7 +32,9 @@ private:
 
   // const edm::EDGetToken rpcDigiToken_;
   const edm::EDGetToken recHitToken_;
-  
+  enum class CppfSource { File, EventSetup } cppfSource_;
+  std::vector<RecHitProcessor::CppfItem> CppfVec_1;
+
 }; // End class EmulateCPPF
 
 #endif // #define L1Trigger_L1TMuonCPPF_EmulateCPPF_h

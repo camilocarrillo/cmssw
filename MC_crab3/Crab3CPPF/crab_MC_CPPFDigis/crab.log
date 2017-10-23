@@ -1,0 +1,165 @@
+DEBUG 2017-10-11 11:57:37,696: 	 Executing command: 'submit'
+DEBUG 2017-10-11 11:57:37,697: 	 Found CRAB cache file /afs/cern.ch/user/m/masegura/.crab3
+DEBUG 2017-10-11 11:57:37,744: 	 Checking credentials
+DEBUG 2017-10-11 11:57:37,744: 	 Proxy file /tmp/x509up_u96343 not found
+DEBUG 2017-10-11 11:57:37,744: 	 Creating new proxy for 24:00 hours with VO group '' and VO role 'NULL'.
+DEBUG 2017-10-11 11:57:42,973: 	 Executing : 
+ command : voms-proxy-init -voms cms:/cms -valid 24:00 -rfc
+ output : None
+ error: None
+ retcode : 0
+DEBUG 2017-10-11 11:57:43,476: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u96343 -timeleft
+ output : 86398
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:43,980: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u96343 -actimeleft
+ output : 86398
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:44,486: 	 Executing : 
+ command : env X509_USER_PROXY=/tmp/x509up_u96343 voms-proxy-info -fqan
+ output : /cms/Role=NULL/Capability=NULL
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:44,486: 	 Proxy created.
+INFO 2017-10-11 11:57:44,486: 	 Will use CRAB configuration file crabCPPF_cfg.py
+DEBUG 2017-10-11 11:57:44,486: 	 Loading CRAB configuration file.
+DEBUG 2017-10-11 11:57:46,554: 	 Will use CRAB PrivateMC plugin (i.e. will run a MC generation job type).
+DEBUG 2017-10-11 11:57:46,667: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=masegura/CN=758129/CN=Manuel Alejandro Segura Delgado
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:46,667: 	 Checking credentials
+DEBUG 2017-10-11 11:57:46,667: 	 Found proxy file /tmp/x509up_u96343
+DEBUG 2017-10-11 11:57:46,668: 	 Getting proxy life time left
+DEBUG 2017-10-11 11:57:47,173: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u96343 -timeleft
+ output : 86394
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:47,778: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u96343 -actimeleft
+ output : 86394
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:47,778: 	 Proxy valid for 23:59:54 hours
+DEBUG 2017-10-11 11:57:48,383: 	 Executing : 
+ command : env X509_USER_PROXY=/tmp/x509up_u96343 voms-proxy-info -fqan
+ output : /cms/Role=NULL/Capability=NULL
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:48,732: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms(045|052|021|031|0118|0118a|0119|0108|0105|0109).cern.ch
+DEBUG 2017-10-11 11:57:48,839: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=masegura/CN=758129/CN=Manuel Alejandro Segura Delgado
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:48,839: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2017-10-11 11:57:48,839: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=masegura/CN=758129/CN=Manuel Alejandro Segura Delgado_cmsweb.cern.ch for credential name
+DEBUG 2017-10-11 11:57:49,143: 	 Executing : 
+ command : myproxy-info -l e3247e83668e66df82efca31a6400a7635e16b8c -s myproxy.cern.ch
+ output : username: e3247e83668e66df82efca31a6400a7635e16b8c
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=masegura/CN=758129/CN=Manuel Alejandro Segura Delgado
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms(045|052|021|031|0118|0118a|0119|0108|0105|0109).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms(045|052|021|031|0118|0118a|0119|0108|0105|0109).cern.ch
+  timeleft: 505:49:13  (21.1 days)
+
+ error: 
+ retcode : 0
+DEBUG 2017-10-11 11:57:49,144: 	 Myproxy is valid: 1820953
+DEBUG 2017-10-11 11:57:49,144: 	 Command use: submit
+DEBUG 2017-10-11 11:57:49,145: 	 Options use: ['-c', 'crabCPPF_cfg.py']
+DEBUG 2017-10-11 11:57:49,477: 	 CRABClient version: 3.3.1707.patch1
+DEBUG 2017-10-11 11:57:49,477: 	 Instance is prod
+DEBUG 2017-10-11 11:57:49,477: 	 Server base url is cmsweb.cern.ch
+DEBUG 2017-10-11 11:57:49,477: 	 Command url /crabserver/prod/workflow
+DEBUG 2017-10-11 11:57:49,477: 	 Started submission
+DEBUG 2017-10-11 11:57:49,477: 	 Working on /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis
+DEBUG 2017-10-11 11:57:49,939: 	 Loading required information from the environment
+DEBUG 2017-10-11 11:57:49,940: 	 Found CMSSW_9_2_5_patch2 for slc6_amd64_gcc530 with base /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2
+DEBUG 2017-10-11 11:57:49,953: 	 UNIQUE NAME: tarUUID 3853ef2e-fbd3-4c89-9d2d-fd78e3810086 
+DEBUG 2017-10-11 11:57:49,954: 	 self.config: from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferLogs = True
+config.General.transferOutputs = True
+config.General.workArea = 'Crab3CPPF'
+config.General.requestName = 'MC_CPPFDigis'
+config.section_('JobType')
+config.JobType.psetName = '/afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/test/RunCPPF_GEN_MC.py'
+config.JobType.pluginName = 'PrivateMC'
+config.section_('Data')
+config.Data.outputDatasetTag = 'CRAB3_SEP2017__MC_generation'
+config.Data.publication = True
+config.Data.unitsPerJob = 100
+config.Data.ignoreLocality = True
+config.Data.splitting = 'EventBased'
+config.Data.outLFNDirBase = '/store/user/masegura/'
+config.Data.outputPrimaryDataset = 'MinBias'
+config.Data.totalUnits = 200
+config.section_('Site')
+config.Site.storageSite = 'T2_CH_CERN'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2017-10-11 11:57:49,954: 	 self.config.JobType.psetName: /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/test/RunCPPF_GEN_MC.py
+INFO 2017-10-11 11:57:49,990: 	 Importing CMSSW configuration /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/test/RunCPPF_GEN_MC.py
+INFO 2017-10-11 11:58:13,848: 	 Finished importing CMSSW configuration /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/test/RunCPPF_GEN_MC.py
+DEBUG 2017-10-11 11:58:13,849: 	 Writing CMSSW configuration to /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis/inputs/PSet.py
+DEBUG 2017-10-11 11:58:14,277: 	 The following EDM output files will be collected: ['SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI.root']
+DEBUG 2017-10-11 11:58:14,277: 	 The following TFile output files will be collected: []
+DEBUG 2017-10-11 11:58:14,277: 	 The following user output files will be collected: []
+DEBUG 2017-10-11 11:58:14,277: 	 Loading required information from the environment
+DEBUG 2017-10-11 11:58:14,277: 	 Found CMSSW_9_2_5_patch2 for slc6_amd64_gcc530 with base /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2
+DEBUG 2017-10-11 11:58:14,277: 	 Making tarball in /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis/inputs/3853ef2e-fbd3-4c89-9d2d-fd78e3810086default.tgz
+DEBUG 2017-10-11 11:58:14,344: 	 Checking directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/lib
+DEBUG 2017-10-11 11:58:14,344: 	 Adding directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/lib to tarball
+DEBUG 2017-10-11 11:58:19,401: 	 Checking directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/biglib
+DEBUG 2017-10-11 11:58:19,401: 	 Adding directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/biglib to tarball
+DEBUG 2017-10-11 11:58:19,402: 	 Checking directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/module
+DEBUG 2017-10-11 11:58:23,080: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/DataFormats/L1TMuon/interface to tarball
+DEBUG 2017-10-11 11:58:23,169: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TCommon/interface to tarball
+DEBUG 2017-10-11 11:58:23,222: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuon/interface to tarball
+DEBUG 2017-10-11 11:58:23,332: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuon/data to tarball
+DEBUG 2017-10-11 11:58:27,102: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonEndCap/interface to tarball
+DEBUG 2017-10-11 11:58:27,449: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TCalorimeter/interface to tarball
+DEBUG 2017-10-11 11:58:27,649: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TCalorimeter/data to tarball
+DEBUG 2017-10-11 11:58:27,671: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TGlobal/interface to tarball
+DEBUG 2017-10-11 11:58:27,740: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonBarrel/interface to tarball
+DEBUG 2017-10-11 11:58:27,784: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonOverlap/interface to tarball
+DEBUG 2017-10-11 11:58:27,868: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TNtuples/interface to tarball
+DEBUG 2017-10-11 11:58:28,069: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/interface to tarball
+DEBUG 2017-10-11 11:58:28,166: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/data to tarball
+DEBUG 2017-10-11 11:58:28,753: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/CondFormats/DataRecord/interface to tarball
+DEBUG 2017-10-11 11:58:29,477: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/CondTools/L1TriggerExt/interface to tarball
+DEBUG 2017-10-11 11:58:29,708: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/DQM/L1TMonitor/interface to tarball
+DEBUG 2017-10-11 11:58:29,946: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/EventFilter/L1TRawToDigi/interface to tarball
+DEBUG 2017-10-11 11:58:30,087: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/HLTrigger/HLTfilters/interface to tarball
+DEBUG 2017-10-11 11:58:30,263: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/UserCodes/Histogramer/interface to tarball
+DEBUG 2017-10-11 11:58:30,376: 	 Adding data directory /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/UserCodes/CPPFDigi/interface to tarball
+DEBUG 2017-10-11 11:58:30,657: 	 Uploading archive /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis/inputs/3853ef2e-fbd3-4c89-9d2d-fd78e3810086default.tgz (12 MB) to the CRAB cache. Using URI https://cmsweb.cern.ch/crabcache
+DEBUG 2017-10-11 11:58:37,987: 	 Loading required information from the environment
+DEBUG 2017-10-11 11:58:37,988: 	 Found CMSSW_9_2_5_patch2 for slc6_amd64_gcc530 with base /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2
+DEBUG 2017-10-11 11:58:37,988: 	 Making tarball in /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis/inputs/debugFiles.tgz
+DEBUG 2017-10-11 11:58:37,991: 	 Uploading archive /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis/inputs/debugFiles.tgz (2 KB) to the CRAB cache. Using URI https://cmsweb.cern.ch/crabcache
+DEBUG 2017-10-11 11:58:38,312: 	 Result uploading input files: 12632e61e75fce26726d6bfa5cabc500a4de00df570c6aa01b1ab7fd821f6731.tar.gz 
+INFO 2017-10-11 11:58:38,313: 	 Sending the request to the server
+DEBUG 2017-10-11 11:58:38,313: 	 Submitting {'maxjobruntime': 1250, 'extrajdl': [], 'ignorelocality': 1, 'savelogsflag': 1, 'useparent': 0, 'asyncdest': 'T2_CH_CERN', 'algoargs': 100, 'cachefilename': '12632e61e75fce26726d6bfa5cabc500a4de00df570c6aa01b1ab7fd821f6731.tar.gz', 'numcores': 1, 'addoutputfiles': [], 'generator': 'pythia', 'maxmemory': 2000, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'priority': 10, 'jobsw': 'CMSSW_9_2_5_patch2', 'edmoutfiles': ['SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI.root'], 'userfiles': [], 'primarydataset': 'MinBias', 'inputdata': '', 'lfn': '/store/user/masegura/', 'dryrun': 0, 'workflow': 'crab_MC_CPPFDigis', 'cacheurl': u'https://cmsweb.cern.ch/crabcache', 'nonprodsw': 0, 'tfileoutfiles': [], 'oneEventMode': 0, 'debugfilename': 'def3ab17ca6fdb956653ac380f27f10d69a2286c95b26628b3475ce8a436007a.tar.gz', 'saveoutput': 1, 'publication': 1, 'jobarch': 'slc6_amd64_gcc530', 'totalunits': 200, 'splitalgo': 'EventBased', 'ignoreglobalblacklist': 0, 'nonvaliddata': 0, 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'publishgroupname': 0, 'jobtype': 'PrivateMC', 'publishname2': 'CRAB3_SEP2017__MC_generation'} 
+DEBUG 2017-10-11 11:58:38,313: 	 Encoded submit request: maxjobruntime=1250&ignorelocality=1&savelogsflag=1&useparent=0&asyncdest=T2_CH_CERN&algoargs=100&cachefilename=12632e61e75fce26726d6bfa5cabc500a4de00df570c6aa01b1ab7fd821f6731.tar.gz&numcores=1&generator=pythia&maxmemory=2000&publishdbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fphys03%2FDBSWriter&priority=10&jobsw=CMSSW_9_2_5_patch2&primarydataset=MinBias&inputdata=&lfn=%2Fstore%2Fuser%2Fmasegura%2F&dryrun=0&workflow=crab_MC_CPPFDigis&cacheurl=https%3A%2F%2Fcmsweb.cern.ch%2Fcrabcache&nonprodsw=0&oneEventMode=0&debugfilename=def3ab17ca6fdb956653ac380f27f10d69a2286c95b26628b3475ce8a436007a.tar.gz&saveoutput=1&publication=1&jobarch=slc6_amd64_gcc530&totalunits=200&splitalgo=EventBased&ignoreglobalblacklist=0&nonvaliddata=0&dbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fglobal%2FDBSReader&publishgroupname=0&jobtype=PrivateMC&publishname2=CRAB3_SEP2017__MC_generation&edmoutfiles=SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI.root
+DEBUG 2017-10-11 11:58:39,079: 	 Result: {u'result': [{u'RequestName': u'171011_095838:masegura_crab_MC_CPPFDigis'}]}
+INFO 2017-10-11 11:58:39,081: 	 Success: Your task has been delivered to the CRAB3 server.
+INFO 2017-10-11 11:58:39,081: 	 Task name: 171011_095838:masegura_crab_MC_CPPFDigis
+INFO 2017-10-11 11:58:39,082: 	 Please use 'crab status' to check how the submission process proceeds.
+DEBUG 2017-10-11 11:58:39,082: 	 About to return
+INFO 2017-10-11 11:58:39,085: 	 Log file is /afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/MC_crab3/Crab3CPPF/crab_MC_CPPFDigis/crab.log

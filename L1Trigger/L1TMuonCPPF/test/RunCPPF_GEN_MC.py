@@ -4,6 +4,8 @@
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
 # with command line options: SingleMuPt10_pythia8_cfi.py -s GEN,SIM,DIGI --pileup=NoPileUp --geometry DB --conditions=auto:run1_mc --eventcontent FEVTDEBUGHLT --no_exec -n 30
 import FWCore.ParameterSet.Config as cms
+import datetime
+import random
 
 process = cms.Process('DIGI')
 
@@ -13,8 +15,11 @@ process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
 process.load('SimGeneral.MixingModule.mixNoPU_cfi')
-process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
-process.load('Configuration.Geometry.GeometryDB_cff')
+#process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
+#process.load('Configuration.Geometry.GeometryDB_cff')
+#process.load('Configuration.StandardSequences.GeometryExtended_cff')
+process.load('Configuration.Geometry.GeometryExtended2016_cff')
+process.load('Configuration.Geometry.GeometryExtended2016Reco_cff')
 process.load('Configuration.StandardSequences.MagneticField_cff')
 process.load('Configuration.StandardSequences.Generator_cff')
 process.load('IOMC.EventVertexGenerators.VtxSmearedRealistic50ns13TeVCollision_cfi')
@@ -31,8 +36,9 @@ process.load('L1Trigger.L1TMuonCPPF.simCppfDigis_cfi')
 from L1Trigger.L1TMuonCPPF.simCppfDigis_cfi import *
 
 process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
+process.MessageLogger = cms.Service("MessageLogger")
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(50)
 )
 
 
@@ -62,7 +68,7 @@ process.FEVTDEBUGHLToutput = cms.OutputModule("PoolOutputModule",
     eventAutoFlushCompressedSize = cms.untracked.int32(10485760),
     fileName = cms.untracked.string('SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI.root'),
    outputCommands = cms.untracked.vstring('drop *',"keep *_simMuonRPCDigis_*_*", "keep *_simCppfDigis_*_*", 
-	"keep *_rpcRecHits_*_*"),
+	"keep *_rpcRecHits_*_*", "keep *_genParticles_*_*"),
     #outputCommands = process.FEVTDEBUGHLTEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -74,13 +80,21 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_mc', '')
 
+
+from IOMC.RandomEngine.RandomServiceHelper import  RandomNumberServiceHelper
+randHelper =  RandomNumberServiceHelper(process.RandomNumberGeneratorService)
+randHelper.populate()
+
+process.RandomNumberGeneratorService.saveFileName =  cms.untracked.string("RandomEngineState.log")
+
+
 process.generator = cms.EDFilter("Pythia8PtGun",
     PGunParameters = cms.PSet(
         AddAntiParticle = cms.bool(True),
-        MaxEta = cms.double(5.0),
+        MaxEta = cms.double(1.6),
         MaxPhi = cms.double(3.14159265359),
         MaxPt = cms.double(100.01),
-        MinEta = cms.double(-5.0),
+        MinEta = cms.double(1.2),
         MinPhi = cms.double(-3.14159265359),
         MinPt = cms.double(9.99),
         ParticleID = cms.vint32(-13)
