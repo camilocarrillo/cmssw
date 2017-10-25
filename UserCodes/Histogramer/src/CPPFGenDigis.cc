@@ -26,76 +26,76 @@ void CPPFGenDigis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
   //Get the gen level information
   Handle<vector<reco::GenParticle>> genParHandle;
   iEvent.getByToken(genParToken_,genParHandle);
- //Get the rechit 
+  //Get the rechit 
    Handle<RPCRecHitCollection> recHits;
    iEvent.getByToken(recHitToken_, recHits);
-  //Get the CPPFDigi 
-  Handle<l1t::CPPFDigiCollection> SimCppfDigis;
-  iEvent.getByToken(cppfDigiToken_, SimCppfDigis);
-
-	  
-	  if(SimCppfDigis.isValid()){
-	    for(auto& SimCppfDigi : *SimCppfDigis){ 
-	      
-	      int Int_theta = SimCppfDigi.Theta_int();
-	      int Int_phi = SimCppfDigi.Phi_int(); 
-	      double Global_theta = SimCppfDigi.Theta_glob(); 
-	      double Global_phi = SimCppfDigi.Phi_glob();
-	      int EMTFSector = SimCppfDigi.EMTF_sector(); 
-
-	      //Theta
-	      Theta_int->Fill(Int_theta);
-	      Phi_int->Fill(Int_phi);
-	      //Phi
-	      Gphi_vsIphi->Fill(Global_phi, Int_phi);
-	      Gtheta_vs_Itheta->Fill(Global_theta, Int_theta);
-	      if(EMTFSector == 1)   Gphi_vsIphi_sector1->Fill(Global_phi, Int_phi);
-	      if(EMTFSector == 2)   Gphi_vsIphi_sector2->Fill(Global_phi, Int_phi);
-	      if(EMTFSector == 3)   Gphi_vsIphi_sector3->Fill(Global_phi, Int_phi);
-	      if(EMTFSector == 4)   Gphi_vsIphi_sector4->Fill(Global_phi, Int_phi);
-	      if(EMTFSector == 5)   Gphi_vsIphi_sector5->Fill(Global_phi, Int_phi);
-	      if(EMTFSector == 6)   Gphi_vsIphi_sector6->Fill(Global_phi, Int_phi);
-	    } //Loop over CPPFDigis
-           }//isValid       
-
-	double phi_sector1 = 0.;
-	double phi_sector2 = 0.;
-	double deltaphi = 0.;
-           for (auto& rechit_it : *recHits){
-        RPCDetId rpcId = rechit_it.rpcId();
-        int station = rpcId.station();
-        int region = rpcId.region();
-        const RPCRoll* roll = rpcGeom->roll(rpcId);
-        const BoundPlane& rollSurface = roll->surface();
-        LocalPoint lPos = rechit_it.localPosition();
-        GlobalPoint gPos = rollSurface.toGlobal(lPos);
-        TVector3 pos(gPos.x(),gPos.y(),gPos.z());
-        double gphi = emtf::rad_to_deg(gPos.phi().value());
- 
-           if(region == 0) continue;
-
-           if(station == 1){
-                Gx_y_station1->Fill(gPos.x(),gPos.y());
-		phi_sector1 = gphi ;
-		}
-
-           if(station == 2){
-                Gx_y_station2->Fill(gPos.x(),gPos.y());
-		phi_sector2 = gphi ;
-
-	  }
-	 deltaphi = phi_sector2 -phi_sector1;
-	if((phi_sector1 != 0.) && (phi_sector2 != 0.)) phi_rechit->Fill(abs(deltaphi)); 
-
-
-
-
-	}//Rechit loop
-
+   //Get the CPPFDigi 
+   Handle<l1t::CPPFDigiCollection> SimCppfDigis;
+   iEvent.getByToken(cppfDigiToken_, SimCppfDigis);
+   
+   
+   if(SimCppfDigis.isValid()){
+     for(auto& SimCppfDigi : *SimCppfDigis){ 
+       
+       int Int_theta = SimCppfDigi.Theta_int();
+       int Int_phi = SimCppfDigi.Phi_int(); 
+       double Global_theta = SimCppfDigi.Theta_glob(); 
+       double Global_phi = SimCppfDigi.Phi_glob();
+       int EMTFSector = SimCppfDigi.EMTF_sector(); 
+       
+       //Theta
+       Theta_int->Fill(Int_theta);
+       Phi_int->Fill(Int_phi);
+       //Phi
+       Gphi_vsIphi->Fill(Global_phi, Int_phi);
+       Gtheta_vs_Itheta->Fill(Global_theta, Int_theta);
+       if(EMTFSector == 1)   Gphi_vsIphi_sector1->Fill(Global_phi, Int_phi);
+       if(EMTFSector == 2)   Gphi_vsIphi_sector2->Fill(Global_phi, Int_phi);
+       if(EMTFSector == 3)   Gphi_vsIphi_sector3->Fill(Global_phi, Int_phi);
+       if(EMTFSector == 4)   Gphi_vsIphi_sector4->Fill(Global_phi, Int_phi);
+       if(EMTFSector == 5)   Gphi_vsIphi_sector5->Fill(Global_phi, Int_phi);
+       if(EMTFSector == 6)   Gphi_vsIphi_sector6->Fill(Global_phi, Int_phi);
+     } //Loop over CPPFDigis
+   }//isValid       
+   
+   double phi_sector1 = 0.;
+   double phi_sector2 = 0.;
+   double deltaphi = 0.;
+   for (auto& rechit_it : *recHits){
+     RPCDetId rpcId = rechit_it.rpcId();
+     int station = rpcId.station();
+     int region = rpcId.region();
+     const RPCRoll* roll = rpcGeom->roll(rpcId);
+     const BoundPlane& rollSurface = roll->surface();
+     LocalPoint lPos = rechit_it.localPosition();
+     GlobalPoint gPos = rollSurface.toGlobal(lPos);
+     TVector3 pos(gPos.x(),gPos.y(),gPos.z());
+     double gphi = emtf::rad_to_deg(gPos.phi().value());
+     
+     if(region == 0) continue;
+     
+     if(station == 1){
+       Gx_y_station1->Fill(gPos.x(),gPos.y());
+       phi_sector1 = gphi ;
+     }
+     
+     if(station == 2){
+       Gx_y_station2->Fill(gPos.x(),gPos.y());
+       phi_sector2 = gphi ;
+       
+     }
+     deltaphi = phi_sector2 -phi_sector1;
+     if((phi_sector1 != 0.) && (phi_sector2 != 0.)) phi_rechit->Fill(abs(deltaphi)); 
+     
+     
+     
+     
+   }//Rechit loop
+   
 } //End class
 
 void CPPFGenDigis::beginRun(const edm::Run& run, const edm::EventSetup& iSetup){
-//  edm::ESHandle<RPCGeometry> rpcGeom;
+  //  edm::ESHandle<RPCGeometry> rpcGeom;
   iSetup.get<MuonGeometryRecord>().get(rpcGeom);
 }
 
