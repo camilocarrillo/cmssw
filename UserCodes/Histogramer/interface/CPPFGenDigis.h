@@ -52,6 +52,7 @@ class CPPFGenDigis : public edm::EDAnalyzer {
    const edm::EDGetTokenT<l1t::CPPFDigiCollection> cppfDigiToken_;
 
    TH1D* Theta_int;
+   TH1D* phi_rechit;
    TH1D* Phi_int;
    TH2D* Gtheta_vs_Itheta;   
    TH2D* Gphi_vsIphi; 
@@ -61,6 +62,8 @@ class CPPFGenDigis : public edm::EDAnalyzer {
    TH2D* Gphi_vsIphi_sector4; 
    TH2D* Gphi_vsIphi_sector5; 
    TH2D* Gphi_vsIphi_sector6;
+   TH2D* Gx_y_station1;
+   TH2D* Gx_y_station2;
 };
 
 

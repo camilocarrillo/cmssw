@@ -27,7 +27,7 @@ process.source = cms.Source("PoolSource",
 )
 in_dir_name = '/afs/cern.ch/user/m/masegura/CMSSW_9_2_5_patch2/src/L1Trigger/L1TMuonCPPF/test/'
 
-readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI.root') )
+readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_1.root') )
 
 #iFile = 0
 #for in_file_name in subprocess.check_output(['ls', in_dir_name]).splitlines():

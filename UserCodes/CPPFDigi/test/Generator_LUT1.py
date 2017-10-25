@@ -28,10 +28,10 @@ process.source = cms.Source("PoolSource",
 in_dir_name = '/eos/cms/store/group/dpg_rpc/comm_rpc/Sandbox/masegura/MinBias/CRAB3_OCT2017_MC_Generation/171011_150025/0000/'
 
 readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_1.root') )
-readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_2.root') )
-readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_3.root') )
-readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_4.root') )
-readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_5.root') )
+#readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_2.root') )
+#readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_3.root') )
+#readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_4.root') )
+#readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia8_cfi_py_GEN_SIM_DIGI_5.root') )
 
 #iFile = 0
 #for in_file_name in subprocess.check_output(['ls', in_dir_name]).splitlines():
@@ -42,7 +42,7 @@ readFiles.extend( cms.untracked.vstring('file:'+in_dir_name+'SingleMuPt10_pythia
 
 process.load('UserCodes.CPPFDigi.cppfgen_cfi')
 process.TFileService = cms.Service("TFileService",
-	fileName = cms.string("BDT_trainning_LUT.root")
+	fileName = cms.string("BDT_trainning_LUT_20.root")
 )
 
 process.p = cms.Path(process.demo)

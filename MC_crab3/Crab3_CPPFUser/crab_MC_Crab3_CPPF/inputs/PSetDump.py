@@ -12818,7 +12818,7 @@ process.hgchefrontDigitizer = cms.PSet(
 )
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(1000)
 )
 
 process.me0DigiCommonParameters = cms.PSet(
@@ -16952,10 +16952,10 @@ process.generator = cms.EDFilter("Pythia8PtGun",
         AddAntiParticle = cms.bool(True),
         MaxEta = cms.double(1.6),
         MaxPhi = cms.double(3.14159265359),
-        MaxPt = cms.double(100.01),
+        MaxPt = cms.double(30.1),
         MinEta = cms.double(1.2),
         MinPhi = cms.double(-3.14159265359),
-        MinPt = cms.double(9.99),
+        MinPt = cms.double(1.1),
         ParticleID = cms.vint32(-13)
     ),
     PythiaParameters = cms.PSet(
@@ -17015,214 +17015,130 @@ process.FEVTDEBUGHLToutput = cms.OutputModule("PoolOutputModule",
 process.DQMStore = cms.Service("DQMStore")
 
 
-process.MessageLogger = cms.Service("MessageLogger",
-    FrameworkJobReport = cms.untracked.PSet(
-        FwkJob = cms.untracked.PSet(
-            limit = cms.untracked.int32(10000000),
-            optionalPSet = cms.untracked.bool(True)
-        ),
-        default = cms.untracked.PSet(
-            limit = cms.untracked.int32(0)
-        ),
-        optionalPSet = cms.untracked.bool(True)
-    ),
-    categories = cms.untracked.vstring('FwkJob', 
-        'FwkReport', 
-        'FwkSummary', 
-        'Root_NoDictionary'),
-    cerr = cms.untracked.PSet(
-        FwkJob = cms.untracked.PSet(
-            limit = cms.untracked.int32(0),
-            optionalPSet = cms.untracked.bool(True)
-        ),
-        FwkReport = cms.untracked.PSet(
-            limit = cms.untracked.int32(10000000),
-            optionalPSet = cms.untracked.bool(True),
-            reportEvery = cms.untracked.int32(1)
-        ),
-        FwkSummary = cms.untracked.PSet(
-            limit = cms.untracked.int32(10000000),
-            optionalPSet = cms.untracked.bool(True),
-            reportEvery = cms.untracked.int32(1)
-        ),
-        INFO = cms.untracked.PSet(
-            limit = cms.untracked.int32(0)
-        ),
-        Root_NoDictionary = cms.untracked.PSet(
-            limit = cms.untracked.int32(0),
-            optionalPSet = cms.untracked.bool(True)
-        ),
-        default = cms.untracked.PSet(
-            limit = cms.untracked.int32(10000000)
-        ),
-        noTimeStamps = cms.untracked.bool(False),
-        optionalPSet = cms.untracked.bool(True),
-        threshold = cms.untracked.string('INFO')
-    ),
-    cerr_stats = cms.untracked.PSet(
-        optionalPSet = cms.untracked.bool(True),
-        output = cms.untracked.string('cerr'),
-        threshold = cms.untracked.string('WARNING')
-    ),
-    cout = cms.untracked.PSet(
-        placeholder = cms.untracked.bool(True)
-    ),
-    debugModules = cms.untracked.vstring(),
-    debugs = cms.untracked.PSet(
-        placeholder = cms.untracked.bool(True)
-    ),
-    default = cms.untracked.PSet(
-
-    ),
-    destinations = cms.untracked.vstring('warnings', 
-        'errors', 
-        'infos', 
-        'debugs', 
-        'cout', 
-        'cerr'),
-    errors = cms.untracked.PSet(
-        placeholder = cms.untracked.bool(True)
-    ),
-    fwkJobReports = cms.untracked.vstring('FrameworkJobReport'),
-    infos = cms.untracked.PSet(
-        Root_NoDictionary = cms.untracked.PSet(
-            limit = cms.untracked.int32(0),
-            optionalPSet = cms.untracked.bool(True)
-        ),
-        optionalPSet = cms.untracked.bool(True),
-        placeholder = cms.untracked.bool(True)
-    ),
-    statistics = cms.untracked.vstring('cerr_stats'),
-    suppressDebug = cms.untracked.vstring(),
-    suppressInfo = cms.untracked.vstring(),
-    suppressWarning = cms.untracked.vstring(),
-    warnings = cms.untracked.PSet(
-        placeholder = cms.untracked.bool(True)
-    )
-)
+process.MessageLogger = cms.Service("MessageLogger")
 
 
 process.RandomNumberGeneratorService = cms.Service("RandomNumberGeneratorService",
     CTPPSFastRecHits = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(286406164)
+        initialSeed = cms.untracked.uint32(660640572)
     ),
     LHCTransport = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(827397659)
+        initialSeed = cms.untracked.uint32(647120439)
     ),
     MuonSimHits = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(494425599)
+        initialSeed = cms.untracked.uint32(295319789)
     ),
     VtxSmeared = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(150698960)
+        initialSeed = cms.untracked.uint32(797142240)
     ),
     ecalPreshowerRecHit = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(212907619)
+        initialSeed = cms.untracked.uint32(123885836)
     ),
     ecalRecHit = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(460578418)
+        initialSeed = cms.untracked.uint32(656921026)
     ),
     externalLHEProducer = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(437599195)
+        initialSeed = cms.untracked.uint32(148791626)
     ),
     famosPileUp = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(502778989)
+        initialSeed = cms.untracked.uint32(387863172)
     ),
     famosSimHits = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(409633620)
+        initialSeed = cms.untracked.uint32(235505475)
     ),
     fastTrackerRecHits = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(500057278)
+        initialSeed = cms.untracked.uint32(504109205)
     ),
     g4SimHits = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(296024578)
+        initialSeed = cms.untracked.uint32(266434525)
     ),
     generator = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(270930007)
+        initialSeed = cms.untracked.uint32(43826890)
     ),
     hbhereco = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(144572674)
+        initialSeed = cms.untracked.uint32(523647235)
     ),
     hfreco = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(627252380)
+        initialSeed = cms.untracked.uint32(596031141)
     ),
     hiSignal = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(351982354)
+        initialSeed = cms.untracked.uint32(814285691)
     ),
     hiSignalG4SimHits = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(696813605)
+        initialSeed = cms.untracked.uint32(629929985)
     ),
     hiSignalLHCTransport = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(716482546)
+        initialSeed = cms.untracked.uint32(834474685)
     ),
     horeco = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(693021119)
+        initialSeed = cms.untracked.uint32(330942636)
     ),
     l1ParamMuons = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(460906543)
+        initialSeed = cms.untracked.uint32(872337415)
     ),
     mix = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(832277719)
+        initialSeed = cms.untracked.uint32(2008807)
     ),
     mixData = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(486087814)
+        initialSeed = cms.untracked.uint32(753129990)
     ),
     mixGenPU = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(233883106)
+        initialSeed = cms.untracked.uint32(51749850)
     ),
     mixRecoTracks = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(453898673)
+        initialSeed = cms.untracked.uint32(535641585)
     ),
     mixSimCaloHits = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(270574497)
+        initialSeed = cms.untracked.uint32(188193282)
     ),
     paramMuons = cms.PSet(
         engineName = cms.untracked.string('TRandom3'),
-        initialSeed = cms.untracked.uint32(776351145)
+        initialSeed = cms.untracked.uint32(830711550)
     ),
     saveFileName = cms.untracked.string('RandomEngineState.log'),
     simBeamSpotFilter = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(103148466)
+        initialSeed = cms.untracked.uint32(446146671)
     ),
     simMuonCSCDigis = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(465255985)
+        initialSeed = cms.untracked.uint32(626518565)
     ),
     simMuonDTDigis = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(877669744)
+        initialSeed = cms.untracked.uint32(550360109)
     ),
     simMuonRPCDigis = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(350054619)
+        initialSeed = cms.untracked.uint32(646484666)
     ),
     simSiStripDigiSimLink = cms.PSet(
         engineName = cms.untracked.string('HepJamesRandom'),
-        initialSeed = cms.untracked.uint32(823933072)
+        initialSeed = cms.untracked.uint32(130484376)
     )
 )
 

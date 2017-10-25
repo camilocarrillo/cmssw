@@ -20,7 +20,7 @@ process.load('SimGeneral.MixingModule.mixNoPU_cfi')
 #process.load('Configuration.StandardSequences.GeometryExtended_cff')
 process.load('Configuration.Geometry.GeometryExtended2016_cff')
 process.load('Configuration.Geometry.GeometryExtended2016Reco_cff')
-process.load('Configuration.StandardSequences.MagneticField_cff')
+process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.Generator_cff')
 process.load('IOMC.EventVertexGenerators.VtxSmearedRealistic50ns13TeVCollision_cfi')
 process.load('GeneratorInterface.Core.genFilterSummary_cff')
@@ -38,7 +38,7 @@ from L1Trigger.L1TMuonCPPF.simCppfDigis_cfi import *
 process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
 process.MessageLogger = cms.Service("MessageLogger")
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(50)
+    input = cms.untracked.int32(1000)
 )
 
 
@@ -93,10 +93,10 @@ process.generator = cms.EDFilter("Pythia8PtGun",
         AddAntiParticle = cms.bool(True),
         MaxEta = cms.double(1.6),
         MaxPhi = cms.double(3.14159265359),
-        MaxPt = cms.double(100.01),
+        MaxPt = cms.double(30.1),
         MinEta = cms.double(1.2),
         MinPhi = cms.double(-3.14159265359),
-        MinPt = cms.double(9.99),
+        MinPt = cms.double(1.1),
         ParticleID = cms.vint32(-13)
     ),
     PythiaParameters = cms.PSet(

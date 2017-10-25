@@ -79,7 +79,7 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
         Muon_pt = 0;
         Muon_Gen.SetXYZ(gen_iter.p4().x(), gen_iter.p4().y(), gen_iter.p4().z());
 	Muon_pt = sqrt(pow(Muon_Gen.Px(), 2)+ pow(Muon_Gen.Py(),2));
-        cout << " Muon_pt " << Muon_pt << endl; 
+//        cout << " Muon_pt " << Muon_pt << endl; 
 	
         //Matching routine
         Float_t min_deltaR1 = 0.4;
@@ -96,7 +96,7 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 	
         Rec_station1=Rec_station2=Rec_station3=Rec_station4 = 0;
         Rec_phi1 = Rec_phi2 = Rec_phi3 = Rec_phi4 = 0.;
-        cout << " Rec hit processor ---------------- " << endl; 
+  //      cout << " Rec hit processor ---------------- " << endl; 
 
         for (auto& rechit_it : *recHits){
       
@@ -113,36 +113,36 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 		//Rechits in the endcaps
 	  if((region == -1) || (region == 1)){
  	  
-          std::cout << " Delta R " << Muon_Gen.DeltaR(pos) << " Global_EMTFPhi " << 
-	    emtf::rad_to_deg(gPos.phi().value()) << " Station " << station << std::endl;
+//          std::cout << " Delta R " << Muon_Gen.DeltaR(pos) << " Global_EMTFPhi " << 
+	    //emtf::rad_to_deg(gPos.phi().value()) << " Station " << station << std::endl;
 	  
 	    if((station == 1) && (Muon_Gen.DeltaR(pos) < min_deltaR1)){
 	      min_deltaR1 = Muon_Gen.DeltaR(pos);
 	      Rec_station1 = station;
 	      Rec_phi1 = emtf::rad_to_deg(gPos.phi().value());
 	      NRechits1 = 1;
-              cout << " Found station: " << station << endl; 
+  //            cout << " Found station: " << station << endl; 
 	    } 
 	    if((station == 2) && (Muon_Gen.DeltaR(pos) < min_deltaR2)){
 	      min_deltaR2 = Muon_Gen.DeltaR(pos);
 	      Rec_station2 = station;
 	      Rec_phi2 = emtf::rad_to_deg(gPos.phi().value());
 	      NRechits2 = 1;
-              cout << " Found station: " << station << endl; 
+    //          cout << " Found station: " << station << endl; 
 	    } 
 	    if((station == 3) && (Muon_Gen.DeltaR(pos) < min_deltaR3)){
 	      min_deltaR3 = Muon_Gen.DeltaR(pos);
 	      Rec_station3 = station;
 	      Rec_phi3 = emtf::rad_to_deg(gPos.phi().value());
 	      NRechits3 = 1;
-              cout << " Found station: " << station << endl; 
+      //        cout << " Found station: " << station << endl; 
 	    } 
 	    if((station == 4) && (Muon_Gen.DeltaR(pos) < min_deltaR4)){
 	      min_deltaR4 = Muon_Gen.DeltaR(pos);
 	      Rec_station4 = station;
 	      Rec_phi4 = emtf::rad_to_deg(gPos.phi().value());
 	      NRechits4 = 1;
-              cout << " Found station: " << station << endl; 
+        //      cout << " Found station: " << station << endl; 
 	    } 
 
 	   }
@@ -153,19 +153,19 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
           //End of loop over RecHits
 	NRechits = NRechits1 + NRechits2 + NRechits3 + NRechits4;
 	if(NRechits > 0) match = true; 
-
+/*
 	cout << " NRechits " << NRechits  
 	     << " Rec_station1 " << Rec_station1 << " GlobalEMTFPhi " << Rec_phi1  
 	     << " Rec_station2 " << Rec_station2 << " GlobalEMTFPhi " << Rec_phi2 
 	     << " Rec_station3 " << Rec_station3 << " GlobalEMTFPhi " << Rec_phi3 
 	     << " Rec_station4 " << Rec_station4 << " GlobalEMTFPhi " << Rec_phi4 << endl; 
-	
+*/	
         // if there is a matched with at least one rechit...	
  	if(match){
 
 	  if(SimCppfDigis.isValid()){
 	    
-	    cout << " CPPF processor ---------------- " << endl; 
+//	    cout << " CPPF processor ---------------- " << endl; 
 	    
             NCPPFDigis = 0; 
             int NCPPFDigis1  = 0;    
@@ -180,7 +180,10 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             rawId1 = rawId2 = rawId3 = rawId4 = 0;
             strip1 = strip2 = strip3 = strip4 = 0;
             cluster_size1 = cluster_size2 = cluster_size3 = cluster_size4 = 0;
-	   
+	    pt_1530 = pt_815 = pt_48 = pt_14 = -121;
+	    dpt_1530 = dpt_815 = dpt_48 = dpt_14 = -121.;
+
+             
 	    for(auto& SimCppfDigi : *SimCppfDigis){ 
 	      const RPCDetId& rpcId = SimCppfDigi.RPCId();
  	      int RawId = rpcId.rawId();
@@ -196,7 +199,7 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 	      
 	      // Find the CPPFDigis Asociated with the rechits
 	      
-	      cout << " Angle of CPPFDigi " << " Cppf_Gphi " << Cppf_Gphi << " Cppf_station " << Cppf_station <<endl;
+//	      cout << " Angle of CPPFDigi " << " Cppf_Gphi " << Cppf_Gphi << " Cppf_station " << Cppf_station <<endl;
 	      
 	      if ((Cppf_Gphi == Rec_phi1) && (Cppf_station == Rec_station1)){
                 Cppf_phi1 = Cppf_Iphi;
@@ -205,12 +208,12 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 		Cppf_Gphi1 = Cppf_Gphi;
                 rawId1 = RawId;
                 strip1 = Strip; 
-		cout << " Cppf_phi1 " << Cppf_phi1 << " Cppf_theta1 " << Cppf_theta1 << " cluster_size1 " << cluster_size1 <<
-		  " Cppf_Gphi1 " << Cppf_Gphi1 << " Rec_phi1 " << Rec_phi1 << " rawId1 " << rawId1 << 
-		  " strip1 " << strip1 << endl;
+//		cout << " Cppf_phi1 " << Cppf_phi1 << " Cppf_theta1 " << Cppf_theta1 << " cluster_size1 " << cluster_size1 <<
+//		  " Cppf_Gphi1 " << Cppf_Gphi1 << " Rec_phi1 " << Rec_phi1 << " rawId1 " << rawId1 << 
+//		  " strip1 " << strip1 << endl;
 	        NCPPFDigis1 = 1;   	
 	      }
- 		else cout << " No found in 1 " << endl; 
+ //		else cout << " No found in 1 " << endl; 
 	      if ((Cppf_Gphi == Rec_phi2) && (Cppf_station == Rec_station2)){
                 Cppf_phi2 = Cppf_Iphi;
                 Cppf_theta2 = Cppf_Itheta;
@@ -218,12 +221,12 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
                 Cppf_Gphi2 = Cppf_Gphi;
                 rawId2 = RawId;
                 strip2 = Strip;
-                cout << " Cppf_phi2 " << Cppf_phi2 << " Cppf_theta2 " << Cppf_theta2 << " cluster_size2 " << cluster_size2 <<
-		  " Cppf_Gphi2 " << Cppf_Gphi2 << " Rec_phi2 " << Rec_phi2 << " rawId2 " << rawId2 <<
-		  " strip2 " << strip2 << endl;
+   //             cout << " Cppf_phi2 " << Cppf_phi2 << " Cppf_theta2 " << Cppf_theta2 << " cluster_size2 " << cluster_size2 <<
+//		  " Cppf_Gphi2 " << Cppf_Gphi2 << " Rec_phi2 " << Rec_phi2 << " rawId2 " << rawId2 <<
+//		  " strip2 " << strip2 << endl;
 	        NCPPFDigis2 = 1;   	
 	      }
- 		else cout << " No found in 2 " << endl; 
+ //		else cout << " No found in 2 " << endl; 
 	      if ((Cppf_Gphi == Rec_phi3) && (Cppf_station == Rec_station3)){
                 Cppf_phi3 = Cppf_Iphi;
                 Cppf_theta3 = Cppf_Itheta;
@@ -231,12 +234,12 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
                 Cppf_Gphi3 = Cppf_Gphi;
                 rawId3 = RawId;
                 strip3 = Strip;
-                cout << " Cppf_phi3 " << Cppf_phi3 << " Cppf_theta3 " << Cppf_theta3 << " cluster_size3 " << cluster_size3 <<
-		  " Cppf_Gphi3 " << Cppf_Gphi3 << " Rec_phi3 " << Rec_phi3 << " rawId3 " << rawId3 <<
-		  " strip3 " << strip3 << endl;
+   //             cout << " Cppf_phi3 " << Cppf_phi3 << " Cppf_theta3 " << Cppf_theta3 << " cluster_size3 " << cluster_size3 <<
+//		  " Cppf_Gphi3 " << Cppf_Gphi3 << " Rec_phi3 " << Rec_phi3 << " rawId3 " << rawId3 <<
+//		  " strip3 " << strip3 << endl;
 	        NCPPFDigis3 = 1;   	
 	      }
- 		else cout << " No found in 3 " << endl; 
+ //		else cout << " No found in 3 " << endl; 
               if ((Cppf_Gphi == Rec_phi4) && (Cppf_station == Rec_station4)){
                 Cppf_phi4 = Cppf_Iphi;
                 Cppf_theta4 = Cppf_Itheta;
@@ -244,12 +247,12 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
                 Cppf_Gphi4 = Cppf_Gphi;
                 rawId4 = RawId;
                 strip4 = Strip;
-                cout << " Cppf_phi4 " << Cppf_phi4 << " Cppf_theta4 " << Cppf_theta4 << " cluster_size4 " << cluster_size4 <<
-		  " Cppf_Gphi4 " << Cppf_Gphi4 << " Rec_phi4 " << Rec_phi4 << " rawId4 " << rawId4 <<
-		  " strip2 " << strip4 << endl;
+   //             cout << " Cppf_phi4 " << Cppf_phi4 << " Cppf_theta4 " << Cppf_theta4 << " cluster_size4 " << cluster_size4 <<
+//		  " Cppf_Gphi4 " << Cppf_Gphi4 << " Rec_phi4 " << Rec_phi4 << " rawId4 " << rawId4 <<
+//		  " strip2 " << strip4 << endl;
 	        NCPPFDigis4 = 1;   	
 	      }
- 		else cout << " No found in 4 " << endl;
+ //		else cout << " No found in 4 " << endl;
 		
 	
               int invalidphi = -511;
@@ -270,22 +273,43 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 	      else Deltatheta34 = invalidtheta;
 
               
-	      cout << " Deltaphi12 " << Deltaphi12 << " Deltaphi23 " << Deltaphi23 << " Deltaphi34 " << Deltaphi34 << endl;  
-	      cout << " Deltatheta12 " << Deltatheta12 << " Deltatheta23 " << Deltatheta23 << " Deltatheta34 " << Deltatheta34 << endl;  
+//	      cout << " Deltaphi12 " << Deltaphi12 << " Deltaphi23 " << Deltaphi23 << " Deltaphi34 " << Deltaphi34 << endl;  
+//	      cout << " Deltatheta12 " << Deltatheta12 << " Deltatheta23 " << Deltatheta23 << " Deltatheta34 " << Deltatheta34 << endl;  
+		if (abs(Deltaphi12) > 0){
+		Int_t deltaphi = abs(Deltaphi12);
+                Float_t ddeltaphi = abs(Cppf_Gphi1-Cppf_Gphi2);
+
+		if((Muon_pt >= 1.) && (Muon_pt < 4.))	{
+		 pt_14 = deltaphi;
+		 dpt_14 = ddeltaphi; 
+		}
+		else if((Muon_pt >= 4.) && (Muon_pt < 8.))	{
+		 pt_48 = deltaphi;
+		 dpt_48 = ddeltaphi; 
+		}
+		else if((Muon_pt >= 8.) && (Muon_pt < 15.))	{
+		 pt_815 = deltaphi;
+		 dpt_815 = ddeltaphi; 
+		}
+		else if((Muon_pt >= 15.) && (Muon_pt < 31.))	{
+		 pt_1530 = deltaphi;
+		 dpt_1530 = ddeltaphi; 
+		}
+	        }
 	      
 	    }//Loop over CPPFDigis
 	    NCPPFDigis = NCPPFDigis1 + NCPPFDigis2 + NCPPFDigis3 + NCPPFDigis4; 
-	    
+	   
 	    //Possible cuts ::::::::::::::::::::
             //if(cluster_size1 > 1) continue;
-	    if(NCPPFDigis < 3) continue;
+	    //if(NCPPFDigis < 3) continue;
             //if((Muon_pt < 50.) || (Muon_pt > 70.)) continue;
             //:::::::::::::::::::::::::::::::::::::
-            cout << " ---------------------- Final CPPFDigis ------------------- " << endl;
-	    cout << NCPPFDigis << endl; 
- 	      cout << " ---------------Final event -------------- " << endl;
+  //          cout << " ---------------------- Final CPPFDigis ------------------- " << endl;
+//	    cout << NCPPFDigis << endl; 
+ //	      cout << " ---------------Final event -------------- " << endl;
 	      
-	      cout << 
+/*	      cout << 
                 Cppf_phi1 << "," << Cppf_phi2 << "," << Cppf_phi3 << "," << Cppf_phi4 << "," << 
                 Cppf_theta1 << "," << Cppf_theta2 << "," << Cppf_theta3 << "," << Cppf_theta4 << "," <<
 		cluster_size1 << "," << cluster_size2 << "," << cluster_size3 << "," << cluster_size4 << "," << 
@@ -294,14 +318,14 @@ void CPPFGen::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
                 Muon_pt << 
 		//"," << 
 		//Control
-		/*
+		
 		Cppf_Gphi1 << "," << Rec_phi1 << "," << rawId1  << "," << strip1 << "," << 
 		Cppf_Gphi2 << "," << Rec_phi2 << "," << rawId2  << "," << strip2 << "," <<
 		Cppf_Gphi3 << "," << Rec_phi3 << "," << rawId3  << "," << strip3 << "," <<
 		Cppf_Gphi4 << "," << Rec_phi4 << "," << rawId4  << "," << strip4  <<
-		*/
+		
 		endl;
-	      
+	      */
 	      features << 
 		Cppf_phi1 << "," << Cppf_phi2 << "," << Cppf_phi3 << "," << Cppf_phi4 << "," <<
                 Cppf_theta1 << "," << Cppf_theta2 << "," << Cppf_theta3 << "," << Cppf_theta4 << "," <<
@@ -387,7 +411,15 @@ void CPPFGen::beginJob(){
   tree_->Branch("Deltatheta23", &Deltatheta23, "Deltatheta23/S");
   tree_->Branch("Deltatheta34", &Deltatheta34, "Deltatheta34/S");
   tree_->Branch("Muon_pt", &Muon_pt, "Muon_pt/F");
-  
+  tree_->Branch("pt_14", &pt_14, "pt_14/S");
+  tree_->Branch("pt_48", &pt_48, "pt_48/S");
+  tree_->Branch("pt_815", &pt_815, "pt_815/S");
+  tree_->Branch("pt_1530", &pt_1530, "pt_1530/S");
+  tree_->Branch("dpt_14", &dpt_14, "dpt_14/F");
+  tree_->Branch("dpt_48", &dpt_48, "dpt_48/F");
+  tree_->Branch("dpt_815", &dpt_815, "dpt_815/F");
+  tree_->Branch("dpt_1530", &dpt_1530, "dpt_1530/F");
+     
   return;
 }
 

@@ -24,7 +24,8 @@ readFiles = cms.untracked.vstring()
 process.source = cms.Source("PoolSource",
         fileNames = readFiles,
 )
-in_dir_name = '/eos/cms/store/group/dpg_rpc/comm_rpc/Sandbox/masegura/MinBias/CRAB3_OCT2017_MC_Generation/171011_150025/0000/'
+in_dir_name = '/eos/cms/store/user/masegura/MinBias/CRAB3_OCT2017_MC_Generation/171023_162733/0000/'
+#in_dir_name = '/eos/cms/store/group/dpg_rpc/comm_rpc/Sandbox/masegura/MinBias/CRAB3_OCT2017_MC_Generation/171011_150025/0000/'
 
 iFile = 0
 for in_file_name in subprocess.check_output(['ls', in_dir_name]).splitlines():

@@ -15,7 +15,7 @@ config.section_("Data")
 config.Data.outputPrimaryDataset = 'MinBias'
 config.Data.splitting = 'EventBased'
 config.Data.unitsPerJob = 10000
-NJOBS = 100  # This is not a configuration parameter, but an auxiliary variable that we use in the next line.
+NJOBS = 10  # This is not a configuration parameter, but an auxiliary variable that we use in the next line.
 config.Data.totalUnits = config.Data.unitsPerJob * NJOBS
 config.Data.outLFNDirBase = '/store/user/%s/' % (getUsernameFromSiteDB())
 config.Data.publication = True

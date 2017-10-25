@@ -167,7 +167,7 @@ void RecHitProcessor::processLook(
 	  if((cppf.rawId == rawId) && (cppf.strip == rechitstrip)){
 	    //Using the RPCGeometry	
 	    if(Geo){
-	RecHitProcessor::print(cppf.int_phi, cppf.int_theta, global_phi, global_theta);
+	//RecHitProcessor::print(cppf.int_phi, cppf.int_theta, global_phi, global_theta);
 	      l1t::CPPFDigi* MainVariables1 = new l1t::CPPFDigi(rpcId, Bx , cppf.int_phi, cppf.int_theta, EMTFsector1, isValid, cppf.strip, clustersize, station, global_phi, global_theta);
 	      l1t::CPPFDigi* MainVariables2 = new l1t::CPPFDigi(rpcId, Bx , cppf.int_phi, cppf.int_theta, EMTFsector2, isValid, cppf.strip, clustersize, station, global_phi, global_theta);
 	      if ((EMTFsector1 > 0) && (EMTFsector2 == 0)){

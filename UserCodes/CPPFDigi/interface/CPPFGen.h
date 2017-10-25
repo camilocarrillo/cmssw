@@ -98,7 +98,16 @@ class CPPFGen : public edm::EDAnalyzer {
    Int_t cluster_size2;	
    Int_t cluster_size3;	
    Int_t cluster_size4;	
-   
+
+   Int_t pt_1530;
+   Int_t pt_815;
+   Int_t pt_48;
+   Int_t pt_14;
+
+   Float_t dpt_1530;
+   Float_t dpt_815;
+   Float_t dpt_48;
+   Float_t dpt_14;
    //TVectors
    TVector3 Muon_Gen;
 
