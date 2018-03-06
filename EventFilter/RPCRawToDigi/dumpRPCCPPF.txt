@@ -1,0 +1,14 @@
+Type                                  Module                      Label             Process         
+----------------------------------------------------------------------------------------------------
+FEDRawDataCollection                  "rpcpacker"                 ""                "testRPCCPPF"   
+MuonDigiCollection<RPCDetId,RPCDigi>    "RPCCPPFRawToDigi"          ""                "testRPCCPPF"   
+MuonDigiCollection<RPCDetId,RPCDigi>    "rpcUnpackingModule"        ""                "testRPCCPPF"   
+MuonDigiCollection<RPCDetId,RPCDigi>    "rpcUnpackingModulePacked"   ""                "testRPCCPPF"   
+RPCAMCLinkCounters                    "RPCCPPFRawToDigi"          ""                "testRPCCPPF"   
+RPCAMCLinkCounters                    "RPCCPPFRawToDigi"          "RPCAMCUnpacker"   "testRPCCPPF"   
+RPCRawDataCounts                      "rpcUnpackingModule"        ""                "testRPCCPPF"   
+RPCRawDataCounts                      "rpcUnpackingModulePacked"   ""                "testRPCCPPF"   
+edm::TriggerResults                   "TriggerResults"            ""                "testRPCCPPF"   
+vector<RPCCPPFDigi>                   "RPCCPPFRawToDigi"          ""                "testRPCCPPF"   
+vector<pair<LinkBoardElectronicIndex,int> >    "rpcUnpackingModule"        ""                "testRPCCPPF"   
+vector<pair<LinkBoardElectronicIndex,int> >    "rpcUnpackingModulePacked"   ""                "testRPCCPPF"   

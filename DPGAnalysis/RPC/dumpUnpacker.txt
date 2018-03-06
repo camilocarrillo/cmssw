@@ -1,0 +1,17 @@
+Type                                  Module                      Label             Process           
+------------------------------------------------------------------------------------------------------
+MuonDigiCollection<RPCDetId,RPCDigi>    "RPCCPPFRawToDigi"          ""                "testRPCUnpackers"   
+MuonDigiCollection<RPCDetId,RPCDigi>    "RPCTwinMuxRawToDigi"       ""                "testRPCUnpackers"   
+MuonDigiCollection<RPCDetId,RPCDigi>    "rpcUnpackingModule"        ""                "testRPCUnpackers"   
+RPCAMCLinkCounters                    "RPCCPPFRawToDigi"          ""                "testRPCUnpackers"   
+RPCAMCLinkCounters                    "RPCTwinMuxRawToDigi"       ""                "testRPCUnpackers"   
+RPCAMCLinkCounters                    "RPCCPPFRawToDigi"          "RPCAMCUnpacker"   "testRPCUnpackers"   
+RPCAMCLinkCounters                    "RPCTwinMuxRawToDigi"       "RPCAMCUnpacker"   "testRPCUnpackers"   
+RPCRawDataCounts                      "rpcUnpackingModule"        ""                "testRPCUnpackers"   
+bool                                  "RPCCPPFDigiComparisonAnalyser"   "Report"          "testRPCUnpackers"   
+bool                                  "RPCCPPFDigiComparisonRollAnalyser"   "Report"          "testRPCUnpackers"   
+bool                                  "RPCTwinMuxDigiComparisonAnalyser"   "Report"          "testRPCUnpackers"   
+bool                                  "RPCTwinMuxDigiComparisonRollAnalyser"   "Report"          "testRPCUnpackers"   
+edm::TriggerResults                   "TriggerResults"            ""                "testRPCUnpackers"   
+vector<RPCCPPFDigi>                   "RPCCPPFRawToDigi"          ""                "testRPCUnpackers"   
+vector<pair<LinkBoardElectronicIndex,int> >    "rpcUnpackingModule"        ""                "testRPCUnpackers"   

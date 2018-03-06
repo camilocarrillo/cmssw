@@ -25,12 +25,12 @@ namespace l1t {
 
     CPPFDigi() :
     bx(-99), phi_int(-99), theta_int(-99), emtf_sector(-99), valid(-99), 
-      first_strip(-99), cluster_size(-99), phi_glob(-99), theta_glob(-99)
+      first_strip(-99), cluster_size(-99), station(-99), phi_glob(-99), theta_glob(-99)
       {};
     
     explicit CPPFDigi( const RPCDetId& _rpcId, int _bx, int _phi_int, int _theta_int,
     		       int _emtf_sector, int _valid, int _first_strip, int _cluster_size,
-    		       float _phi_glob, float _theta_glob
+    		       int _station, float _phi_glob, float _theta_glob
     		       );
 
     virtual ~CPPFDigi() {};
@@ -50,6 +50,7 @@ namespace l1t {
     int Valid()        const { return valid; }
     int First_strip()  const { return first_strip; }
     int Cluster_size() const { return cluster_size; }
+    int Station()      const { return station; }
     float Phi_glob()   const { return phi_glob; }
     float Theta_glob() const { return theta_glob; }
     
@@ -63,6 +64,7 @@ namespace l1t {
     int valid;     
     int first_strip;  // Lowest-numbered strip in the cluster
     int cluster_size; // Number of strips in the cluster
+    int station;
     float phi_glob;   // Global phi coordinate in degrees, from -180 to 180
     float theta_glob; // Global theta coordinate in degrees, from 0 to 90
   

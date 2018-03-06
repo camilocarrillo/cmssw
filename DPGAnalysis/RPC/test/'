@@ -1,0 +1,37 @@
+#! /usr/bin/env python
+
+from ROOT import *
+gROOT.SetBatch(False)
+
+def main():
+
+    print '\nInside CPPFOUTUnpac\n'
+
+    ################################
+    #####   Load input files   #####
+    ################################
+
+    in_dir = '/afs/cern.ch/user/c/chengl/public/cppftest/'
+    in_file_name = in_dir+'testRPCCPPF.root'
+    out_file = TFile('plots/CPPFOUT.root','recreate')
+
+    in_tree_name = 'Events'
+
+    in_file = TFile.Open(in_file_name)
+    in_tree = in_file.Get(in_tree_name)
+    
+    in_tree.GetEntry(200)
+    Event = in_tree.EventAuxiliary    #RPCDetIdRPCDigiMuonDigiCollection_RPCCPPFRawToDigi__testRPCCPPF#RPCCPPFDigis_RPCCPPFRawToDigi__testRPCCPPF
+    CPPFRPCDigi = in_tree.RPCCPPFDigis_RPCCPPFRawToDigi__testRPCCPPF
+    #CPPFRPCDigi.GetEntry(200)
+
+    print in_tree.GetEntries()
+
+
+    out_file.Close()
+    del in_tree
+    in_file.Close()
+
+if __name__ == '__main__':
+    main()
+
