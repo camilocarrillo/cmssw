@@ -9,6 +9,7 @@
 #include "DataFormats/L1TMuon/interface/EMTFHit.h"
 #include "DataFormats/L1TMuon/interface/EMTFRoad.h"
 #include "DataFormats/L1TMuon/interface/EMTFTrack.h"
+#include "DataFormats/L1TMuon/interface/CPPFDigi.h"
 
 #include <vector>
 
@@ -31,6 +32,9 @@ namespace {
    
     l1t::EMTFTrackCollection emtfTrack;
     edm::Wrapper<l1t::EMTFTrackCollection> emtfTrackWrap;
+   
+    l1t::CPPFDigiCollection cppfDigi;
+    edm::Wrapper<l1t::CPPFDigiCollection> cppfDigiWrap;
   };
 }
 
