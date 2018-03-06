@@ -46,6 +46,7 @@ cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/DataFormats/RPCDigi ./Da
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/DataFormats/L1TMuon ./DataFormats
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/L1TMuonCPPF/ ./L1Trigger
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/EventFilter/RPCRawToDigi ./EventFilter
+cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/DPGAnalysis .
 scram b clean
 scram b -j6
 ```
