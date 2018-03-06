@@ -41,7 +41,7 @@ git fetch YourGitHubName
 git checkout -b YourBranchName
 ```
 
-##No Run this lines, these are just for me.
+## No Run this lines whether all is OK, these are just for me.
 ```
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/DataFormats/L1TMuon ./DataFormats
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/L1TMuonCPPF ./L1Trigger
@@ -51,7 +51,7 @@ cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/DPGAnalysis .
 scram b -j6
 ```
 
-##Check the input file.
+## Check the input file before to run.
 ```
 cd L1Trigger/L1TMuonCPPF
 cmsRun test/RunCPPF_GEN_UNPACKER.py
