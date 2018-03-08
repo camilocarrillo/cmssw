@@ -19,21 +19,17 @@ git fetch cms-l1t-offline
 git cms-merge-topic -u cms-l1t-offline:l1t-integration-CMSSW_9_2_5_patch2
 git checkout cms-l1t-offline/l1t-integration-CMSSW_9_2_5_patch2
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1TMuon/data
+git fetch maseguracern
+git cms-merge-topic -u maseguracern:CPPF_Emulator
 scram b clean 
 scram b -j6
 ```
+## Run the code (check the input)
+ls /eos/cms/store/data/Run2017F/SingleMuon/RAW/v1/000/306/125/00000/
+cd L1Trigger/L1TMuonCPPF
+cmsRun test/RunCPPF_GEN_UNPACKER.py
 
-```
-git fetch abrinke1
-git cms-merge-topic -u abrinke1:CPPF_emul_9_2_5_patch2
-scram b -j6
-```
-
-```
-git fetch maseguracern
-git cms-merge-topic -u maseguracern:CPPF_Emulator
-scram b -j6
-```
+## Notes for Alejandro. Do not run these lines.
 
 ```
 git remote add YourGitHubName git@github.com:YourGitHubName/cmssw.git
@@ -41,7 +37,7 @@ git fetch YourGitHubName
 git checkout -b YourBranchName
 ```
 
-## No Run this lines whether all is OK, these are just for me.
+
 ```
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/DataFormats/L1TMuon ./DataFormats
 cp -r /afs/cern.ch/user/m/masegura/public/CPPF_Emulator/L1TMuonCPPF ./L1Trigger
