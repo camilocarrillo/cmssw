@@ -51,6 +51,8 @@ class DQM_CPPF : public edm::EDAnalyzer {
    const edm::EDGetTokenT<l1t::CPPFDigiCollection> cppfDigiToken_;
 
    TH1D* Phi_Integer;
+   TH1D* Phi_Global;
+   TH2D* Phi_Global_Integer;
    TH2D* Occupancy_EMTFSector;
 };
 
