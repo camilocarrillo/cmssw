@@ -24,7 +24,7 @@ scram b -j6
 ## Run the code (check the input)
 ```
 cd L1Trigger/L1TMuonCPPF/DQM_CPPF/test/
-cmsRun test/cppf_dqm.py
+cmsRun Generator_DQM_CPPF.py
 ```
 
 ## Setup your Github space (In case you haven't)
