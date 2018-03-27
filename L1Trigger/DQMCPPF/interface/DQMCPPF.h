@@ -20,6 +20,7 @@
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 #include "DataFormats/L1TMuon/interface/CPPFDigi.h"
 #include "DataFormats/Common/interface/Handle.h"
+#include "Geometry/RPCGeometry/interface/RPCGeomServ.h"
 
 #include "CondFormats/RPCObjects/interface/RPCMaskedStrips.h"
 #include "CondFormats/RPCObjects/interface/RPCDeadStrips.h"
@@ -36,28 +37,38 @@
 
 class DQM_CPPF : public edm::EDAnalyzer {
   
-   public:
-	explicit DQM_CPPF(const edm::ParameterSet&);
-	~DQM_CPPF();
-        edm::ESHandle <RPCGeometry> rpcGeom;
-        virtual void beginRun(const edm::Run&, const edm::EventSetup&);
-        virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
-
-   private:
-
-	virtual void beginJob() override;
-
-   const edm::EDGetTokenT<RPCRecHitCollection> recHitToken_;
-   const edm::EDGetTokenT<l1t::CPPFDigiCollection> cppfDigiToken_;
-
-   TH1D* Phi_Integer;
-   TH1D* Theta_Integer;
-   TH1D* Phi_Global;
-   TH1D* Theta_Global;
-   TH2D* Phi_Global_Integer;
-   TH2D* Theta_Global_Integer;
-   TH2D* Occupancy_EMTFSector;
-   TH2D* Track_Bx;
+ public:
+  explicit DQM_CPPF(const edm::ParameterSet&);
+  ~DQM_CPPF();
+  edm::ESHandle <RPCGeometry> rpcGeom;
+  virtual void beginRun(const edm::Run&, const edm::EventSetup&);
+  virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+  
+ private:
+  
+  virtual void beginJob() override;
+  
+  const edm::EDGetTokenT<RPCRecHitCollection> recHitToken_;
+  const edm::EDGetTokenT<l1t::CPPFDigiCollection> cppfDigiToken_;
+  
+  
+  std::vector<int> EMTFsector1bins;
+  std::vector<int> EMTFsector2bins;
+  std::vector<int> EMTFsector3bins;
+  std::vector<int> EMTFsector4bins;
+  std::vector<int> EMTFsector5bins;
+  std::vector<int> EMTFsector6bins;
+  
+  std::map<int , std::vector<int>> fill_info;
+  
+  TH1D* Phi_Integer;
+  TH1D* Theta_Integer;
+  TH1D* Phi_Global;
+  TH1D* Theta_Global;
+  TH2D* Phi_Global_Integer;
+  TH2D* Theta_Global_Integer;
+  TH2D* Occupancy_EMTFSector;
+  TH2D* Track_Bx;
 };
 
 

@@ -6,7 +6,9 @@
 #include "TVector3.h"
 #include "TLorentzVector.h"
 #include <ios>
+#include <map>
 #include "L1Trigger/DQMCPPF/interface/DQMCPPF.h"
+
 
 using namespace edm;
 
@@ -28,11 +30,31 @@ void DQM_CPPF::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
   Handle<l1t::CPPFDigiCollection> CppfDigis;
   iEvent.getByToken(cppfDigiToken_, CppfDigis);
   
+  //Fill the specific bin for each EMTF sector 
+  for(int i = 1; i < 7; i++ ){
+    EMTFsector1bins.push_back(i);
+    EMTFsector2bins.push_back(i+6);
+    EMTFsector3bins.push_back(i+12);
+    EMTFsector4bins.push_back(i+18);
+    EMTFsector5bins.push_back(i+24);
+    EMTFsector6bins.push_back(i+30);
+  }
+  //FIll the map for each EMTF sector 
+  fill_info[1] = EMTFsector1bins;
+  fill_info[2] = EMTFsector2bins;
+  fill_info[3] = EMTFsector3bins;
+  fill_info[4] = EMTFsector4bins;
+  fill_info[5] = EMTFsector5bins;
+  fill_info[6] = EMTFsector6bins;
+  
+  
   for(auto& rec_hits : *recHits){
     RPCDetId rpcId = rec_hits.rpcId();
     int ring = rpcId.ring(); 
     int station = rpcId.station();
     int region = rpcId.region();
+    //int sector = rpcId.sector();
+    int subsector = rpcId.subsector();
     int clustersize = rec_hits.clusterSize();
     int firststrip = rec_hits.firstClusterStrip();
     
@@ -45,70 +67,81 @@ void DQM_CPPF::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
       rechitstrip += medium;
     }
     
+    
     if(clustersize > 3) continue;
+    
+    int EMTF_sector = 0;    
+    int EMTF_subsector = 0;
     
     for(auto& cppf_digis : *CppfDigis){
       
       if((cppf_digis.rpcId().rawId() == rpcId.rawId()) && (cppf_digis.first_strip() == rechitstrip)){
-	
+        //Region -	
         if(region == -1){
+	  
+	  //for Occupancy
+          EMTF_sector = cppf_digis.emtf_sector();
+          EMTF_subsector = fill_info[EMTF_sector][subsector-1];
+	  
 	  if((station == 4) && (ring == 3))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 0.5);
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 1);
 	  else if((station == 4) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 1.5);
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 2);
 	  else if((station == 3) && (ring == 3))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 2.5);
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 3);
 	  else if((station == 3) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 3.5);
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 4);
 	  else if((station == 2) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 4.5);
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 5);
 	  else if((station == 1) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 5.5);
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 6);
+	  
+	  //for Track_Bx 
+          if(EMTF_sector==1)
+            Track_Bx->Fill(6,cppf_digis.bx());
+          else if(EMTF_sector==2)
+            Track_Bx->Fill(5,cppf_digis.bx());
+          else if(EMTF_sector==3)
+            Track_Bx->Fill(4,cppf_digis.bx());
+          else if(EMTF_sector==4)
+            Track_Bx->Fill(3,cppf_digis.bx());
+          else if(EMTF_sector==5)
+            Track_Bx->Fill(2,cppf_digis.bx());
+          else if(EMTF_sector==6)
+            Track_Bx->Fill(1,cppf_digis.bx());
         }
-	
+        //Region +	
         else if(region == 1){
+	  
+	  //for Occupancy
+          EMTF_sector = cppf_digis.emtf_sector();
+          EMTF_subsector = fill_info[EMTF_sector][subsector-1]; 
+	  
 	  if((station == 1) && (ring == 2)) 
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 6.5);          
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 7);          
 	  else if((station == 2) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 7.5);          
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 8);          
 	  else if((station == 3) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 8.5);          
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 9);          
 	  else if((station == 3) && (ring == 3))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 9.5);          
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 10);          
 	  else if((station == 4) && (ring == 2))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 10.5);          
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 11);          
 	  else if((station == 4) && (ring == 3))
-	    Occupancy_EMTFSector->Fill(cppf_digis.emtf_sector(), 11.5);          
-        }
-	
-	//For Track_Bx
-        if(region == -1){
-          if(cppf_digis.emtf_sector()==1)
-            Track_Bx->Fill(5.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==2)
-            Track_Bx->Fill(4.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==3)
-            Track_Bx->Fill(3.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==4)
-            Track_Bx->Fill(2.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==5)
-            Track_Bx->Fill(1.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==6)
-            Track_Bx->Fill(0.5,cppf_digis.bx());
-        }
- 	else if(region == 1){
-          if(cppf_digis.emtf_sector()==1)
-            Track_Bx->Fill(6.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==2)
-            Track_Bx->Fill(7.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==3)
-            Track_Bx->Fill(8.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==4)
-            Track_Bx->Fill(9.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==5)
-            Track_Bx->Fill(10.5,cppf_digis.bx());
-          else if(cppf_digis.emtf_sector()==6)
-            Track_Bx->Fill(11.5,cppf_digis.bx());
+	    Occupancy_EMTFSector->Fill(EMTF_subsector, 12);          
+	  //for Track_Bx
+          if(EMTF_sector==1)
+            Track_Bx->Fill(7,cppf_digis.bx());
+          else if(EMTF_sector==2)
+            Track_Bx->Fill(8,cppf_digis.bx());
+          else if(EMTF_sector==3)
+            Track_Bx->Fill(9,cppf_digis.bx());
+          else if(EMTF_sector==4)
+            Track_Bx->Fill(10,cppf_digis.bx());
+          else if(EMTF_sector==5)
+            Track_Bx->Fill(11,cppf_digis.bx());
+          else if(EMTF_sector==6)
+            Track_Bx->Fill(12,cppf_digis.bx());
 	}
 	
       } //Condition to save CPPFDIgis
@@ -142,8 +175,8 @@ void DQM_CPPF::beginJob(){
   Theta_Global = fs->make<TH1D>("Theta_Global", "Theta_Global", 32, 0., 3.15);
   Phi_Global_Integer = fs->make<TH2D>("Phi_Global_Integer", "Phi_Global_Integer", 360, -180, 180, 1240, 0.,1240.);
   Theta_Global_Integer = fs->make<TH2D>("Theta_Global_Integer", "Theta_Global_Integer", 45, 0, 45, 32, 0.,32.);
-  Occupancy_EMTFSector = fs->make<TH2D>("Occupancy_EMTFSector", "Occupancy_EMTFSector", 42, 1., 7., 11, 0.,12.); 
-  Track_Bx = fs->make<TH2D>("Track_Bx","Track_Bx", 12, 0, 12., 7,-3.,4.);
+  Occupancy_EMTFSector = fs->make<TH2D>("Occupancy_EMTFSector", "Occupancy_EMTFSector", 36, 1., 37., 12, 1.,13.); 
+  Track_Bx = fs->make<TH2D>("Track_Bx","Track_Bx", 12, 1., 13., 7,-3.,4.);
   return;
 }
 //define this as a plug-in
