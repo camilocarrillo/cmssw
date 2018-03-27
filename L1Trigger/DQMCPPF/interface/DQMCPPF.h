@@ -39,14 +39,14 @@ class DQM_CPPF : public edm::EDAnalyzer {
   
  public:
   explicit DQM_CPPF(const edm::ParameterSet&);
-  ~DQM_CPPF();
+  ~DQM_CPPF() override;
   edm::ESHandle <RPCGeometry> rpcGeom;
-  virtual void beginRun(const edm::Run&, const edm::EventSetup&);
-  virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+  void beginRun(const edm::Run&, const edm::EventSetup&) override;
+  void analyze(const edm::Event&, const edm::EventSetup&) override;
   
  private:
   
-  virtual void beginJob() override;
+  void beginJob() override;
   
   const edm::EDGetTokenT<RPCRecHitCollection> recHitToken_;
   const edm::EDGetTokenT<l1t::CPPFDigiCollection> cppfDigiToken_;

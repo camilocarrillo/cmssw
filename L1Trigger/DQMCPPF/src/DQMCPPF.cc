@@ -72,7 +72,8 @@ void DQM_CPPF::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
     
     int EMTF_sector = 0;    
     int EMTF_subsector = 0;
-    
+    int EMTF_bx = 0;  
+  
     for(auto& cppf_digis : *CppfDigis){
       
       if((cppf_digis.rpcId().rawId() == rpcId.rawId()) && (cppf_digis.first_strip() == rechitstrip)){
@@ -96,19 +97,20 @@ void DQM_CPPF::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 	  else if((station == 1) && (ring == 2))
 	    Occupancy_EMTFSector->Fill(EMTF_subsector, 6);
 	  
-	  //for Track_Bx 
+	  //for Track_Bx
+          EMTF_bx = cppf_digis.bx();  
           if(EMTF_sector==1)
-            Track_Bx->Fill(6,cppf_digis.bx());
+            Track_Bx->Fill(6,EMTF_bx);
           else if(EMTF_sector==2)
-            Track_Bx->Fill(5,cppf_digis.bx());
+            Track_Bx->Fill(5,EMTF_bx);
           else if(EMTF_sector==3)
-            Track_Bx->Fill(4,cppf_digis.bx());
+            Track_Bx->Fill(4,EMTF_bx);
           else if(EMTF_sector==4)
-            Track_Bx->Fill(3,cppf_digis.bx());
+            Track_Bx->Fill(3,EMTF_bx);
           else if(EMTF_sector==5)
-            Track_Bx->Fill(2,cppf_digis.bx());
+            Track_Bx->Fill(2,EMTF_bx);
           else if(EMTF_sector==6)
-            Track_Bx->Fill(1,cppf_digis.bx());
+            Track_Bx->Fill(1,EMTF_bx);
         }
         //Region +	
         else if(region == 1){
@@ -130,18 +132,19 @@ void DQM_CPPF::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 	  else if((station == 4) && (ring == 3))
 	    Occupancy_EMTFSector->Fill(EMTF_subsector, 12);          
 	  //for Track_Bx
+          EMTF_bx = cppf_digis.bx();
           if(EMTF_sector==1)
-            Track_Bx->Fill(7,cppf_digis.bx());
+            Track_Bx->Fill(7,EMTF_bx);
           else if(EMTF_sector==2)
-            Track_Bx->Fill(8,cppf_digis.bx());
+            Track_Bx->Fill(8,EMTF_bx);
           else if(EMTF_sector==3)
-            Track_Bx->Fill(9,cppf_digis.bx());
+            Track_Bx->Fill(9,EMTF_bx);
           else if(EMTF_sector==4)
-            Track_Bx->Fill(10,cppf_digis.bx());
+            Track_Bx->Fill(10,EMTF_bx);
           else if(EMTF_sector==5)
-            Track_Bx->Fill(11,cppf_digis.bx());
+            Track_Bx->Fill(11,EMTF_bx);
           else if(EMTF_sector==6)
-            Track_Bx->Fill(12,cppf_digis.bx());
+            Track_Bx->Fill(12,EMTF_bx);
 	}
 	
       } //Condition to save CPPFDIgis
