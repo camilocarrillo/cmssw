@@ -23,7 +23,7 @@ scram b -j6
 
 ## Run the code (check the input)
 ```
-cd L1Trigger/L1TMuonCPPF/DQM_CPPF/test/
+cd L1Trigger/DQM_CPPF/test/
 cmsRun Generator_DQM_CPPF.py
 ```
 
